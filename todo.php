@@ -31,4 +31,4 @@
     </div>
 @endsection
 
- ?>
+ ?>admin_image,build,digital_books,storage,.htaccess,csms_logo.webp,favicon.ico,hot,index.phprobots.txt

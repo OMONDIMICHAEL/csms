@@ -30,6 +30,9 @@ use App\Http\Controllers\FeeController;
 use App\Exports\CheckInExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('login', function () {
     return view('auth.login');
 });
