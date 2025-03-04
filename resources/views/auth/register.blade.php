@@ -91,7 +91,7 @@
             <x-text-input name="parent_id"/>
 
             <x-input-label for="number_of_children" class="mt-4" :value="__('Number of Children')" />
-            <input type="number" name="number_of_children">
+            <x-text-input type="number" name="number_of_children" />
         </div>
 
         {{-- Security Fields --}}
@@ -128,7 +128,7 @@
                 <!-- {{ __('Already registered?') }} -->
             <!-- </a> -->
 
-            <x-primary-button class="ms-4">
+            <x-primary-button type="submit" class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
