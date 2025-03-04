@@ -71,7 +71,7 @@
             <x-input-label for="student_id" class="mt-4" :value="__('Student ID')" />
             <x-text-input name="student_id"/>
             <x-input-label for="class" class="mt-4" :value="__('Class Level')" />
-            <select name="class" class="form-control" required>
+            <select name="class" class="form-control">
                 <option value="" disabled selected>Select Class Level</option>
                 <option value="Form 1">Form 1</option>
                 <option value="Form 2">Form 2</option>
@@ -81,7 +81,7 @@
             <x-input-label for="parent_contact" class="mt-4" :value="__('Parent Contact')" />
             <x-text-input name="parent_contact"/>
             <x-input-label for="email" :value="__('Parent Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="parent_email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="parent_email" :value="old('email')" autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
