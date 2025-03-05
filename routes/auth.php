@@ -70,7 +70,7 @@ Route::middleware('guest')->group(function () {
 //     return back()->with('message', 'Verification link sent!');
 // })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 // /////////////////
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
@@ -82,6 +82,8 @@ Route::middleware('auth')->group(function () {
         ->middleware('throttle:6,1')
         ->name('verification.send');
 
+// copied this route line above and commented it above too
+Route::middleware('auth')->group(function () {
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
 
