@@ -42,7 +42,7 @@ class SecurityController extends Controller
           'user_id' => $user->id,
           'name' => $user->name,
           'role' => $user->role,
-          'check_in_time' => now(),
+          // 'check_in_time' => now(),
         ]);
         // Send Notification to Parent if User is a Student
         if ($user->role === 'student' && $user->parent_email) {
