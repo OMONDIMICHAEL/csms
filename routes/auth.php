@@ -39,48 +39,48 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-// Email Verification Notice
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+// // Email Verification Notice
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
 
-// Email Verification Handler
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill(); // Mark email as verified
+// // Email Verification Handler
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill(); // Mark email as verified
 
-    // Redirect based on user role
-    $user = Auth::user();
+//     // Redirect based on user role
+//     $user = Auth::user();
 
-    return match ($user->role) {
-        'admin' => redirect()->route('admin.admin_dashboard'),
-        'teacher' => redirect()->route('teacher.teacher_dashboard'),
-        'student' => redirect()->route('student.student_dashboard'),
-        'parent' => redirect()->route('parent.parent_dashboard'),
-        'security' => redirect()->route('security.security_dashboard'),
-        'accountant' => redirect()->route('accountant.accountant_dashboard'),
-        'librarian' => redirect()->route('librarian.librarian_dashboard'),
-        default => redirect('/dashboard'), // Fallback
-    };
-})->middleware(['auth', 'signed'])->name('verification.verify');
+//     return match ($user->role) {
+//         'admin' => redirect()->route('admin.admin_dashboard'),
+//         'teacher' => redirect()->route('teacher.teacher_dashboard'),
+//         'student' => redirect()->route('student.student_dashboard'),
+//         'parent' => redirect()->route('parent.parent_dashboard'),
+//         'security' => redirect()->route('security.security_dashboard'),
+//         'accountant' => redirect()->route('accountant.accountant_dashboard'),
+//         'librarian' => redirect()->route('librarian.librarian_dashboard'),
+//         default => redirect('/dashboard'), // Fallback
+//     };
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
-// Resend Verification Email
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
+// // Resend Verification Email
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 // /////////////////
 Route::middleware('auth')->group(function () {
-//     Route::get('verify-email', EmailVerificationPromptController::class)
-//         ->name('verification.notice');
-//
-//     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-//         ->middleware(['signed', 'throttle:6,1'])
-//         ->name('verification.verify');
-//
-//     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-//         ->middleware('throttle:6,1')
-//         ->name('verification.send');
+    Route::get('verify-email', EmailVerificationPromptController::class)
+        ->name('verification.notice');
+
+    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('verification.verify');
+
+    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+        ->middleware('throttle:6,1')
+        ->name('verification.send');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
