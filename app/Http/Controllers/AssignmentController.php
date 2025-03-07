@@ -48,6 +48,7 @@ class AssignmentController extends Controller
       Log::error('Error uploading assignment: ' . $e->getMessage());
       return back()->with('error', 'Failed to upload assignment. Please try again.');
     }
+  }
 
       // Display assignments for students to view
       public function index()
