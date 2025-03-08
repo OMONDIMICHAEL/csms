@@ -31,6 +31,7 @@ class AssignmentController extends Controller
           ]);
 
           try {
+            // $filePath = $request->file('file_path')->store('assignments',config('filesystems.default'));
             $filePath = $request->file('file_path')->store('assignments','public');
 
             Assignment::create([
@@ -46,7 +47,7 @@ class AssignmentController extends Controller
             return back()->with('success', 'Assignment uploaded successfully');
         } catch (\Exception $e) {
       Log::error('Error uploading assignment: ' . $e->getMessage());
-      return back()->with('error', 'Failed to upload assignment. Please try again.');
+      // return back()->with('error', 'Failed to upload assignment. Please try again.');
     }
   }
 
