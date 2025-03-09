@@ -29,7 +29,7 @@ class ExamController extends Controller
         ]);
     try{
         // $filePath = $request->file('file_path')->store('exams', 'public');
-        $filePath = $request->file('file') ? $request->file('file')->store('learning_resources') : null;
+        $filePath = $request->file('file') ? $request->file('file')->store('learning_resources')/* : null*/;
 
         Exam::create([
             'subject_id' => $request->subject_id,
