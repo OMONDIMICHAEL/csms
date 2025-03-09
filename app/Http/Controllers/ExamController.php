@@ -7,7 +7,8 @@ use App\Models\Exam;
 use App\Models\Assignment;
 use App\Models\Grade;
 use App\Models\Subject;
-// use App\Models\Submission;
+use Illuminate\Support\Facades\Log;
+use App\Models\Submission;
 
 class ExamController extends Controller
 {
@@ -25,7 +26,7 @@ class ExamController extends Controller
             'file_path' => 'required|file',
             'exam_date' => 'nullable|date',
         ]);
-
+    try{
         $filePath = $request->file('file_path')->store('exams', 'public');
 
         Exam::create([
@@ -39,7 +40,18 @@ class ExamController extends Controller
         ]);
 
         return back()->with('success', 'Exam uploaded successfully');
+      } catch (\Exception $e) {
+        // Log the error
+      Log::error('Error uploading exam: ' . $e->getMessage(), [
+          'exception' => $e,
+          'trace' => $e->getTraceAsString(),
+      ]);
+
+      // Return with an error message and details
+      return back()->with('error', 'Failed to upload exam. Error: ' . $e->getMessage());
+    }
   }
+
   // Show exams and assignments to students
     public function index()
     {
