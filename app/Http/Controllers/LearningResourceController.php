@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LearningResource;
+use App\Models\Exam;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
