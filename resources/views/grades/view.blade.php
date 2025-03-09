@@ -76,7 +76,7 @@
                                       <td>
                                         <!-- <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a> -->
                                         @if($exam->file_path)
-                                        <a href="{{ route('exam.download', $exam->id) }}" class="btn btn-sm btn-info" target="_blank">Download</a>
+                                        <a href="{{ route('exam.download', $exam->id) }}" class="btn btn-sm btn-info">Download</a>
                                         @endif
                                       </td>
                                       <td>
