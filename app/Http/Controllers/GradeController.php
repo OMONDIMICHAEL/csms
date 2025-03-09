@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Assignment;
 use App\Models\Grade;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class GradeController extends Controller
 {
@@ -49,7 +50,7 @@ class GradeController extends Controller
             'assignment_id' => 'nullable|exists:assignments,id',
             'marks' => 'required|integer',
         ]);
-
+    try{
         // $grade = $request->marks >= 50 ? 'Pass' : 'Fail';
         $grade = $this->calculateGrade($request->marks);
 
@@ -63,6 +64,16 @@ class GradeController extends Controller
         ]);
 
         return back()->with('success', 'Grade recorded successfully');
+  } catch (\Exception $e) {
+        // Log the error
+      Log::error('Error grading: ' . $e->getMessage(), [
+          'exception' => $e,
+          'trace' => $e->getTraceAsString(),
+      ]);
+
+      // Return with an error message and details
+      return back()->with('error', 'Failed to grade. Error: ' . $e->getMessage());
+    }
   }
   private function calculateGrade($marks)
     {
