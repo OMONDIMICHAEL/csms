@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env.example('FILESYSTEM_DISK', 'public'),
+    'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
