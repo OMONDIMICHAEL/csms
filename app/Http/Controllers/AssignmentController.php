@@ -46,8 +46,14 @@ class AssignmentController extends Controller
 
             return back()->with('success', 'Assignment uploaded successfully');
         } catch (\Exception $e) {
-      Log::error('Error uploading assignment: ' . $e->getMessage());
-      return back()->with('error', 'Failed to upload assignment. Please try again.',Log::error('Error uploading assignment: ' . $e->getMessage()));
+        // Log the error
+      Log::error('Error uploading assignment: ' . $e->getMessage(), [
+          'exception' => $e,
+          'trace' => $e->getTraceAsString(),
+      ]);
+
+      // Return with an error message and details
+      return back()->with('error', 'Failed to upload assignment. Error: ' . $e->getMessage());
     }
   }
 
