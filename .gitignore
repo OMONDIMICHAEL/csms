@@ -21,3 +21,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+!/storage/assignments
+!/storage/exams
+!/storage/digital_books
+!/storage/exam_submissions
+
+
