@@ -23,11 +23,13 @@ class ExamController extends Controller
             'subject_id' => 'required|exists:subjects,id',
             'title' => 'required',
             'description' => 'nullable',
-            'file_path' => 'required|file',
+            // 'file_path' => 'required|file',
+            'file' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,mp4|max:10240',
             'exam_date' => 'nullable|date',
         ]);
     try{
-        $filePath = $request->file('file_path')->store('exams', 'public');
+        // $filePath = $request->file('file_path')->store('exams', 'public');
+        $filePath = $request->file('file') ? $request->file('file')->store('learning_resources') : null;
 
         Exam::create([
             'subject_id' => $request->subject_id,
