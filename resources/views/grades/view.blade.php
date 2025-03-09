@@ -75,9 +75,9 @@
                                       <td>{{ $exam->exam_date }}</td>
                                       <td>
                                         <!-- <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a> -->
-                                        @if($exam->file_path)
+                                        <!-- @if($exam->file_path) -->
                                         <a href="{{ route('exam.download', $exam->id) }}" class="btn btn-sm btn-info">Download</a>
-                                        @endif
+                                        <!-- @endif -->
                                       </td>
                                       <td>
                                           <form action="{{ route('exams.submit', $exam->id) }}" method="POST" enctype="multipart/form-data">
