@@ -27,7 +27,7 @@ class LearningResourceController extends Controller
           'file' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,mp4|max:10240',
           'external_link' => 'nullable|url'
       ]);
-
+      try{
       $filePath = $request->file('file') ? $request->file('file')->store('learning_resources') : null;
 
       LearningResource::create([
@@ -41,6 +41,16 @@ class LearningResourceController extends Controller
       ]);
 
       return back()->with('success', 'Learning resource uploaded successfully.');
+  } catch (\Exception $e) {
+        // Log the error
+      Log::error('Error uploading learning resource: ' . $e->getMessage(), [
+          'exception' => $e,
+          'trace' => $e->getTraceAsString(),
+      ]);
+
+      // Return with an error message and details
+      return back()->with('error', 'Failed to upload learning resource. Error: ' . $e->getMessage());
+    }
   }
 
   // Display available resources (for students)
@@ -70,5 +80,10 @@ class LearningResourceController extends Controller
   {
       $resource = LearningResource::findOrFail($id);
       return Storage::download($resource->file_path);
+  }
+  public function download_exam($id)
+  {
+      $resource_exam = Exam::findOrFail($id);
+      return Storage::download($resource_exam->file_path);
   }
 }

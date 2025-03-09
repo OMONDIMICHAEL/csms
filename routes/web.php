@@ -185,6 +185,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/learning-resources/create', [LearningResourceController::class, 'create'])->name('learning_resources.create'); // Teachers upload
     Route::post('/learning-resources', [LearningResourceController::class, 'store'])->name('learning_resources.store');
     Route::get('/learning-resources/download/{id}', [LearningResourceController::class, 'download'])->name('learning_resources.download');
+    Route::get('/exam/download/{id}', [LearningResourceController::class, 'download_exam'])->name('exam.download');
 });
 
 
