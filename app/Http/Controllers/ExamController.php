@@ -7,8 +7,10 @@ use App\Models\Exam;
 use App\Models\Assignment;
 use App\Models\Grade;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use App\Models\Submission;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
