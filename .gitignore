@@ -26,5 +26,6 @@ yarn-error.log
 !/storage/exams
 !/storage/digital_books
 !/storage/exam_submissions
+!/storage/submissions
 
 
