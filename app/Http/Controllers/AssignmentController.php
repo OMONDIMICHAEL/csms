@@ -9,7 +9,6 @@ use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class AssignmentController extends Controller
 {
@@ -26,37 +25,24 @@ class AssignmentController extends Controller
               'class_level' => 'required',
               'title' => 'required',
               'description' => 'nullable',
-              'file_path' => 'required|file|max:10240|mimes:pdf,doc,docx,txt,pptx,xlsx', // Max 10MB, PDF/DOC/DOCX files',
+              'file_path' => 'required|file',
               'deadline' => 'nullable|date',
           ]);
 
-          try {
-            // $filePath = $request->file('file_path')->store('assignments',config('filesystems.default'));
-            // $filePath = $request->file('file_path')->store('assignments'/*,'public'*/);
-            $filePath = $request->file('file') ? $request->file('file')->store('assignments');
+          $filePath = $request->file('file_path')->store('assignments','public');
 
-            Assignment::create([
-                'subject_id' => $request->subject_id,
-                'teacher_id' => auth()->id(),
-                'class_level' => $request->class_level,
-                'title' => $request->title,
-                'description' => $request->description,
-                'file_path' => $filePath,
-                'deadline' => $request->deadline,
-            ]);
+          Assignment::create([
+              'subject_id' => $request->subject_id,
+              'teacher_id' => auth()->id(),
+              'class_level' => $request->class_level,
+              'title' => $request->title,
+              'description' => $request->description,
+              'file_path' => $filePath,
+              'deadline' => $request->deadline,
+          ]);
 
-            return back()->with('success', 'Assignment uploaded successfully');
-        } catch (\Exception $e) {
-        // Log the error
-      Log::error('Error uploading assignment: ' . $e->getMessage(), [
-          'exception' => $e,
-          'trace' => $e->getTraceAsString(),
-      ]);
-
-      // Return with an error message and details
-      return back()->with('error', 'Failed to upload assignment. Error: ' . $e->getMessage());
-    }
-  }
+          return back()->with('success', 'Assignment uploaded successfully');
+      }
 
       // Display assignments for students to view
       public function index()
