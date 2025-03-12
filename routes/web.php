@@ -29,6 +29,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\FeeController;
 use App\Exports\CheckInExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 Route::get('/', function () {
     return view('welcome');
@@ -187,6 +189,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/learning-resources/download/{id}', [LearningResourceController::class, 'download'])->name('learning_resources.download');
     Route::get('/exam/download/{id}', [LearningResourceController::class, 'download_exam'])->name('exam.download');
 });
+
+    // download assignment student
+    Route::get('/download/{file}', function ($file) {
+        $path = storage_path('app/public/' . $file);
+
+        if (!file_exists($path)) {
+            abort(404, 'File not found');
+        }
+
+        return Response::download($path);
+    })->name('download.file');
 
 
 require __DIR__.'/auth.php';
