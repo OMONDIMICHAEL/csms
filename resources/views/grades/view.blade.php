@@ -37,7 +37,10 @@
                                       <td>{{ $assignment->subject->name }}</td>
                                       <td>Form {{ $assignment->class_level }}</td>
                                       <td>{{ $assignment->deadline }}</td>
-                                      <td><a href="{{ asset('storage/' . $assignment->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a></td>
+                                      <td>
+                                        <a href="{{ route('download.file', $exam->file_path) }}" class="btn btn-sm btn-info">Download</a>
+                                        <!-- <a href="{{ asset('storage/' . $assignment->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a> -->
+                                      </td>
                                       <td>
                                           <form action="{{ route('assignments.submit', $assignment->id) }}" method="POST" enctype="multipart/form-data">
                                               @csrf
@@ -75,8 +78,7 @@
                                       <td>{{ $exam->exam_date }}</td>
                                       <td>
                                         <!-- this link was for preveiwing in the browser  before downloading -->
-                                        <!-- <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a> -->
-                                        <a href="{{ route('download.file', $exam->file_path) }}" class="btn btn-sm btn-info">Download</a>
+                                        <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a>
                                         <!-- <a href="{{ route('exam.download', $exam->id) }}" class="btn btn-sm btn-info">Download</a> -->
                                       </td>
                                       <td>
