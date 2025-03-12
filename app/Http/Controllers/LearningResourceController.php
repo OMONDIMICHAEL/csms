@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LearningResource;
 use App\Models\Exam;
+use App\Models\Assignment;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -82,9 +83,9 @@ class LearningResourceController extends Controller
       $resource = LearningResource::findOrFail($id);
       return Storage::download($resource->file_path);
   }
-  // public function download_exam($id)
-  // {
-  //     $exams = Exam::findOrFail($id);
-  //     return Storage::download($exams->file_path);
-  // }
+  public function download_exam($id)
+  {
+      $assignments = Assignment::findOrFail($id);
+      return Storage::download($assignments->file_path);
+  }
 }

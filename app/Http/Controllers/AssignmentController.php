@@ -32,7 +32,8 @@ class AssignmentController extends Controller
 
           try {
             // $filePath = $request->file('file_path')->store('assignments',config('filesystems.default'));
-            $filePath = $request->file('file_path')->store('assignments','public');
+            // $filePath = $request->file('file_path')->store('assignments'/*,'public'*/);
+            $filePath = $request->file('file') ? $request->file('file')->store('assignments');
 
             Assignment::create([
                 'subject_id' => $request->subject_id,
