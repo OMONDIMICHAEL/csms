@@ -78,8 +78,8 @@
                                       <td>Form {{ $exam->class_level }}</td>
                                       <td>{{ $exam->exam_date }}</td>
                                       <td>
-                                        <a href="{{ route('download.file', $exam->file_path) }}" class="btn btn-sm btn-info">Download</a>
-                                        <!-- <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a> -->
+                                        <!-- <a href="{{ route('download.file', $exam->file_path) }}" class="btn btn-sm btn-info">Download</a> -->
+                                        <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a>
                                       </td>
                                       <td>
                                           <form action="{{ route('exams.submit', $exam->id) }}" method="POST" enctype="multipart/form-data">
