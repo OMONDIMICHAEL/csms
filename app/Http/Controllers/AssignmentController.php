@@ -41,7 +41,7 @@ class AssignmentController extends Controller
               'class_level' => $request->class_level,
               'title' => $request->title,
               'description' => $request->description,
-              'file_path' => '/' . $fileName, // Store the relative path
+              'file_path' => 'digital_books/' . $fileName, // Store the relative path
               'deadline' => $request->deadline,
           ]);
 
