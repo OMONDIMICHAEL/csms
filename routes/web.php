@@ -188,11 +188,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/learning-resources', [LearningResourceController::class, 'store'])->name('learning_resources.store');
     Route::get('/learning-resources/download/{id}', [LearningResourceController::class, 'download'])->name('learning_resources.download');
     
-    Route::get('/exam/download/{id}', [LearningResourceController::class, 'download_exam'])->name('assignment.download');
+    // Route::get('/exam/download/{id}', [LearningResourceController::class, 'download_exam'])->name('assignment.download');
 });
 
     // download assignment student
-    Route::get('/download/{file}', function ($file) {
+    /*Route::get('/download/{file}', function ($file) {
         $path = storage_path('app/public/' . $file);
 
         if (!file_exists($path)) {
@@ -200,7 +200,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
 
         return Response::download($path);
-    })->name('download.file');
+    })->name('download.file');*/
 
 
 require __DIR__.'/auth.php';

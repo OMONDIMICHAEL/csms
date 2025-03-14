@@ -83,9 +83,9 @@ class LearningResourceController extends Controller
       $resource = LearningResource::findOrFail($id);
       return Storage::download($resource->file_path);
   }
-  public function download_exam($id)
+  /*public function download_exam($id)
   {
       $assignments = Assignment::findOrFail($id);
       return Storage::download($assignments->file_path);
-  }
+  }*/
 }
