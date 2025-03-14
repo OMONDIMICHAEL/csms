@@ -25,9 +25,10 @@ class AssignmentController extends Controller
               'class_level' => 'required',
               'title' => 'required',
               'description' => 'nullable',
-              'file_path' => 'required|file',
+              'file_path' => 'required|file|max:10240|mimes:pdf,doc,docx,txt,pptx,xlsx', // Max 10MB, PDF/DOC/DOCX files
               'deadline' => 'nullable|date',
           ]);
+          try{
 
           $filePath = $request->file('file_path')->store('assignments','public');
 
@@ -42,7 +43,17 @@ class AssignmentController extends Controller
           ]);
 
           return back()->with('success', 'Assignment uploaded successfully');
-      }
+      } catch (\Exception $e) {
+        // Log the error
+        Log::error('Error uploading assignment: ' . $e->getMessage(), [
+            'exception' => $e,
+            'trace' => $e->getTraceAsString(),
+        ]);
+
+        // Return with an error message
+        return back()->with('error', 'Failed to upload assignment. Error: ' . $e->getMessage());
+    }
+  }
 
       // Display assignments for students to view
       public function index()
