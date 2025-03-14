@@ -38,7 +38,7 @@
                                       <td>Form {{ $assignment->class_level }}</td>
                                       <td>{{ $assignment->deadline }}</td>
                                       <td>
-                                        <a href="{{ route('download.file', $assignment->file_path) }}" class="btn btn-sm btn-info">Download</a>
+                                        <a href="{{ asset($assignment->file_path) }}" class="btn btn-sm btn-info" download>Download</a>
                                         <!-- <a href="{{ asset('storage/' . $assignment->file_path) }}" class="btn btn-sm btn-info" target="_blank">Download</a> -->
                                       </td>
                                       <td>
