@@ -193,7 +193,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // download assignment student
     Route::get('/download/{file}', function ($file) {
-        $path = storage_path('app/public/' . $file);
+        $path = public_path($file);
 
         if (!file_exists($path)) {
             abort(404, 'File not found');
