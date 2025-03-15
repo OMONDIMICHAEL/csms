@@ -192,7 +192,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
     // download assignment student
-    /*Route::get('/{file}', function ($file) {
+    Route::get('/{file}', function ($file) {
         $path = public_path($file);
 
         if (!file_exists($path)) {
@@ -200,7 +200,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         }
 
         return Response::download($path);
-    })->name('download.file');*/
+    })->name('download.file');
 
 
 require __DIR__.'/auth.php';
