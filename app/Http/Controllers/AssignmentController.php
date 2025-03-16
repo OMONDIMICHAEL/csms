@@ -33,7 +33,7 @@ class AssignmentController extends Controller
           // Store the file in the public/uploads directory
           $file = $request->file('file_path');
           $fileName = time() . '_' . $file->getClientOriginalName(); // Unique file name
-          $filePath = $file->move(public_path('assignments'), $fileName);
+          $filePath = $file->move(public_path('digital_books'), $fileName);
 
           Assignment::create([
               'subject_id' => $request->subject_id,
@@ -41,7 +41,7 @@ class AssignmentController extends Controller
               'class_level' => $request->class_level,
               'title' => $request->title,
               'description' => $request->description,
-              'file_path' => 'assignments/' . $fileName, // Store the relative path
+              'file_path' => 'digital_books/' . $fileName, // Store the relative path
               'deadline' => $request->deadline,
           ]);
 
