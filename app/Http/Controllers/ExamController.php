@@ -42,7 +42,7 @@ class ExamController extends Controller
             'class_level' => $request->class_level,
             'title' => $request->title,
             'description' => $request->description,
-            'file_path' => $filePath,
+            'file_path' => 'digital_books/' . $fileName,
             'exam_date' => $request->exam_date,
         ]);
 
