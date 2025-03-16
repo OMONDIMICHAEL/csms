@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\BookTransaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LibrarianController extends Controller
 {
@@ -78,6 +79,7 @@ class LibrarianController extends Controller
             'isbn' => 'required|string|unique:books',
             'total_copies' => 'required|integer|min:1',
         ]);
+        try{
 
         Book::create([
             'title' => $request->title,
@@ -88,7 +90,17 @@ class LibrarianController extends Controller
         ]);
 
         return redirect()->route('librarian.borrowed')->with('success', 'Book added successfully.');
+    } catch (\Exception $e) {
+        // Log the error
+      Log::error('Error uploading book: ' . $e->getMessage(), [
+          'exception' => $e,
+          'trace' => $e->getTraceAsString(),
+      ]);
+
+      // Return with an error message and details
+      return back()->with('error', 'Failed to upload book. Error: ' . $e->getMessage());
     }
+}
     //  Student borrows a book
    public function borrowBook($book_id)
    {
