@@ -24,12 +24,12 @@ class LibrarianController extends Controller
   // Show available books & issued books
     public function showIndex()
     {
-        // $books = Book::all();
-        // $transactions = BookTransaction::where('student_id', Auth::id())->where('status', 'issued')->with('book')->get();
+        $books = Book::all();
+        $transactions = BookTransaction::where('student_id', Auth::id())->where('status', 'issued')->with('book')->get();
         //
-        // return view('librarian.index', compact('books', 'transactions'));
-        $books = Book::where('available_copies', '>', 0)->get();
-        return view('librarian.index', compact('books'));
+        return view('librarian.index', compact('books', 'transactions'));
+        // $books = Book::where('available_copies', '>', 0)->get();
+        // return view('librarian.index', compact('books'));
     }
 
     // Issue a book
