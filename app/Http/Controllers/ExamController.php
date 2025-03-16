@@ -31,7 +31,7 @@ class ExamController extends Controller
         ]);
     try{
         // $filePath = $request->file('file_path')->store('exams', 'public');
-        $filePath = $request->file('file') ? $request->file('file')->store('digital_books') : null;
+        $filePath = $request->file('file') ? $request->file('file')->store('digital_books');
 
         Exam::create([
             'subject_id' => $request->subject_id,
