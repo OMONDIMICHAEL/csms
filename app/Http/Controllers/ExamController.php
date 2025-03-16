@@ -25,13 +25,16 @@ class ExamController extends Controller
             'subject_id' => 'required|exists:subjects,id',
             'title' => 'required',
             'description' => 'nullable',
-            // 'file_path' => 'required|file',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,mp4|max:10240',
+            // 'file' => 'required|file',
+            'file_path' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,txt,xlsx|max:10240',
             'exam_date' => 'nullable|date',
         ]);
     try{
-        $filePath = $request->file('file_path')->store('digital_books');
+        // $filePath = $request->file('file_path')->store('digital_books');
         // $filePath = $request->file('file') ? $request->file('file')->store('digital_books') : null;
+      $file = $request->file('file_path');
+      $fileName = time() . '_' . $file->getClientOriginalName(); // Unique file name
+      $filePath = $file->move(public_path('digital_books'), $fileName);
 
         Exam::create([
             'subject_id' => $request->subject_id,
