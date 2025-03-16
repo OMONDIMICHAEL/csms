@@ -41,9 +41,12 @@ class ParentController extends Controller
     public function viewChildAttendance()
     {
         $parent = Auth::user();
+        $parent_email = $parent->email;
+        $student_parent_email = User::where('parent_email', $parent_email)->get();
 
         // Get all children of the logged-in parent
-        $children = $parent->children;
+        // $children = $parent->children;
+        $children = $student_parent_email;
 
         // Fetch attendance records for each child
         $attendanceRecords = Attendance::whereIn('student_id', $children->pluck('id'))->with('student')->get();
