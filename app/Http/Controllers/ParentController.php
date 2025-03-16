@@ -24,9 +24,12 @@ class ParentController extends Controller
     public function viewChildGrades()
     {
         $parent = Auth::user();
+        $parent_email = $parent->email;
+        $student_parent_email = User::where('parent_email', $parent_email)->get();
 
         // Get all children of the logged-in parent
-        $children = $parent->children;
+        // $children = $parent->children;
+        $children = $student_parent_email;
 
         // Fetch grades for each child
         $grades = Grade::whereIn('student_id', $children->pluck('id'))->with('subject', 'student')->get();
