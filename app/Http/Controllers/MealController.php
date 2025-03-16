@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MealPlan;
 use App\Models\MealTracking;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class MealController extends Controller
 {
@@ -16,10 +17,8 @@ class MealController extends Controller
       $meals = MealPlan::orderBy('date', 'asc')->get();
       return view('cook.meals_index', compact('meals','trackings'));
   }
-  //  Display meal plans
   public function takeIndex()
   {
-    // $trackings = MealTracking::with('student', 'mealPlan')->latest()->get();
       $meals = MealPlan::orderBy('date', 'asc')->get();
       return view('student.meals_index', compact('meals'));
   }
@@ -47,7 +46,7 @@ class MealController extends Controller
       if (MealTracking::where('student_id', $studentId)->where('meal_plan_id', $mealPlanId)->exists()) {
           return back()->with('error', 'You have already taken this meal.');
       }
-
+      try{
       MealTracking::create([
           'student_id' => $studentId,
           'meal_plan_id' => $mealPlanId,
@@ -56,6 +55,16 @@ class MealController extends Controller
       ]);
 
       return back()->with('success', 'Meal recorded successfully.');
+  } catch (\Exception $e) {
+        // Log the error
+      Log::error('Error taking meal: ' . $e->getMessage(), [
+          'exception' => $e,
+          'trace' => $e->getTraceAsString(),
+      ]);
+
+      // Return with an error message and details
+      return back()->with('error', 'Failed to take meal. Error: ' . $e->getMessage());
+    }
   }
 
   //  Show students who have taken meals (for cook)
