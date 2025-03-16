@@ -30,8 +30,8 @@ class ExamController extends Controller
             'exam_date' => 'nullable|date',
         ]);
     try{
-        // $filePath = $request->file('file_path')->store('exams', 'public');
-        $filePath = $request->file('file') ? $request->file('file')->store('digital_books');
+        $filePath = $request->file('file_path')->store('digital_books');
+        // $filePath = $request->file('file') ? $request->file('file')->store('digital_books') : null;
 
         Exam::create([
             'subject_id' => $request->subject_id,
