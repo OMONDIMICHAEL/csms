@@ -30,7 +30,7 @@ class AssignmentController extends Controller
           ]);
           try{
 
-          // Store the file in the public/uploads directory
+          // Store the file in the public/digital_books directory
           $file = $request->file('file_path');
           $fileName = time() . '_' . $file->getClientOriginalName(); // Unique file name
           $filePath = $file->move(public_path('digital_books'), $fileName);

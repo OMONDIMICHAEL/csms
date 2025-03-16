@@ -30,7 +30,7 @@ class LearningResourceController extends Controller
           'external_link' => 'nullable|url'
       ]);
       try{
-      $filePath = $request->file('file') ? $request->file('file')->store('learning_resources') : null;
+      $filePath = $request->file('file') ? $request->file('file')->store('digital_books') : null;
 
       LearningResource::create([
           'teacher_id' => auth()->id(),
