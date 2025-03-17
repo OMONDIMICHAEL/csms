@@ -14,8 +14,9 @@ class AccountantController extends Controller
   }
   public function showCommunications()
   {
+    try{
       $communications = Communication::latest()->limit(5)->get();
-      try{
+      
       return view('accountant.accountant_communication', compact('communications'));
     } catch (\Exception $e) {
         // Log the error
