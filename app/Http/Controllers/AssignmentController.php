@@ -9,6 +9,7 @@ use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AssignmentController extends Controller
 {
