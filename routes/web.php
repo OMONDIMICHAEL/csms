@@ -103,7 +103,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // accountant
     Route::get('/accountant/accountant_dashboard', [App\Http\Controllers\AccountantController::class, 'index'])->name('accountant.accountant_dashboard');
-    Route::get('/accountant/communications', [AccountantController::class, 'showCommunications'])->name('accountant.communications');
+    Route::get('/accountant/communications', [App\Http\Controllers\AccountantController::class, 'showCommunications'])->name('accountant.communications');
     Route::get('/my/fee', [FeeController::class, 'index'])->name('student.fees_index');
     Route::resource('fees', FeeController::class);
     Route::post('/fees/pay', [PaymentController::class, 'pay'])->name('fees.pay');
