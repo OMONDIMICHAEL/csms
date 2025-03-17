@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Communication;
+use App\Models\Communication;
 use App\Models\User;
 use App\Models\Grade;
 use App\Models\Attendance;
