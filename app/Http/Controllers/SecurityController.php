@@ -11,6 +11,7 @@ use App\Notifications\StudentCheckInOutNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Models\Visitor;
 use App\Models\Communication;
+use Illuminate\Support\Facades\Log;
 
 class SecurityController extends Controller
 {
@@ -68,6 +69,7 @@ class SecurityController extends Controller
       if (!$checkIn) {
         return redirect()->back()->with('error', 'User has not checked in.');
       }
+      try{
       $checkIn->update(['check_out_time' => now()]);
       // Send Notification to Parent if User is a Student
       if ($user->role === 'student' && $user->parent_email) {
@@ -75,6 +77,16 @@ class SecurityController extends Controller
               ->notify(new StudentCheckInOutNotification($user, 'check-out', now()));
       }
         return redirect()->back()->with('success', 'Check-out successful.');
+        } catch (\Exception $e) {
+        // Log the error
+        Log::error('Error checking out: ' . $e->getMessage(), [
+            'exception' => $e,
+            'trace' => $e->getTraceAsString(),
+        ]);
+
+        // Return with an error message
+        return back()->with('error', 'Failed to check out. Error: ' . $e->getMessage());
+    }
     }
     // method for checkin history
     public function viewCheckInHistory(Request $request)
